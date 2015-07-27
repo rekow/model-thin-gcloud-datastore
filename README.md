@@ -8,8 +8,8 @@ Install alongside [`model-thin`](https://www.npmjs.com/package/model-thin) via `
 
 ```json
 dependencies: {
-  "model-thin": ">=0.3.0",
-  "model-thin-gcloud-datastore": "^1.1.1"
+  "model-thin": ">=0.4.0",
+  "model-thin-gcloud-datastore": "^1.2.0"
 }
 ```
 
@@ -19,7 +19,7 @@ dependencies: {
 var datastore = require('model-thin-gcloud-datastore');
 ```
 
-Before use the adapter needs to be configured with your project's ID, found in the developer console:
+Before use the adapter needs to be configured with your project's ID:
 
 ```javascript
 datastore.configure({
@@ -28,6 +28,8 @@ datastore.configure({
 ```
 
 A `namespace` and `apiEndpoint` property can also be provided on the config object to further customize the adapter.
+
+If not running on Google Compute Engine, additional credentials need to be provided. See the [Authorization](https://github.com/GoogleCloudPlatform/gcloud-node#user-content-authorization) section of the `gcloud-node` readme for instructions.
 
 Once configured, the adapter can be selected according to the `model-thin` [adapter API](https://github.com/davidrekow/model-thin#adapters).
 

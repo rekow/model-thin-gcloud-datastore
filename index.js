@@ -105,10 +105,9 @@ module.exports = {
    * @param {function(?Error, Array.<Object>=, string=)} cb
    */
   query: function (queryOpts, cb) {
-    var kind = queryOpts.kind,
-      query = this.ds.createQuery(
-        queryOpts.namespace || kind.namespace || this.ds.namespace,
-        kind.kind),
+    var query = this.ds.createQuery(
+      queryOpts.namespace || this.ds.namespace,
+      queryOpts.kind),
       cursor, filters;
 
     if (queryOpts.select) {
@@ -159,15 +158,18 @@ module.exports = {
         return cb(err);
       }
 
-      if (!queryOpts.select) {
-        entities = entities.map(function (entity) {
-          var model = new kind(entity.data);
-          model.id(entity.key.path[entity.key.path.length - 1])
-          return model;
-        });
-      }
-
       cb(null, entities, cursor);
     }, cb);
+  },
+
+  /**
+   * @param {Object.<{key: DatastoreKey, data: Object}>} entity
+   * @param {function(new:Model)} kind
+   * @return {Model}
+   */
+  toModel: function (entity, kind) {
+    var model = new kind(entity.data);
+    model.id(entity.key.path[entity.key.path.length - 1])
+    return model;
   }
 };
