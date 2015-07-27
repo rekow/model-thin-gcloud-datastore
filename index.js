@@ -40,7 +40,7 @@ module.exports = {
    */
   key: function (model) {
     var path = [model.kind];
-    
+
     if (model.id()) {
       path.push(model.id())
     }
@@ -105,9 +105,10 @@ module.exports = {
    * @param {function(?Error, Array.<Object>=, string=)} cb
    */
   query: function (queryOpts, cb) {
-    var query = this.ds.createQuery(
-      queryOpts.namespace || this.ds.namespace,
-      queryOpts.kind),
+    var kind = queryOpts.kind,
+      query = this.ds.createQuery(
+        queryOpts.namespace || this.ds.namespace,
+        kind.prototype.kind),
       cursor, filters;
 
     if (queryOpts.select) {
@@ -115,7 +116,7 @@ module.exports = {
     }
 
     if (filters) {
-      filters = queryOpts.filters;
+      filters = queryOpts.filter;
 
       for (var k in filters) {
         if (k === 'ancestor' || k === 'hasAncestor') {
@@ -153,6 +154,20 @@ module.exports = {
       query.offset(queryOpts.offset);
     }
 
-    this.ds.runQuery(query, cb);
+    this.ds.runQuery(query, function (err, entities, cursor) {
+      if (err) {
+        return cb(err);
+      }
+
+      if (!queryOpts.select) {
+        entities = entities.map(function (entity) {
+          var model = new kind(entity.data);
+          model.id(entity.key.path[entity.key.path.length - 1])
+          return model;
+        });
+      }
+
+      cb(null, entities, cursor);
+    }, cb);
   }
 };
