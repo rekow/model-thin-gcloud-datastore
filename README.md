@@ -29,19 +29,6 @@ datastore.configure({
 
 A `namespace` and `apiEndpoint` property can also be provided on the config object to further customize the adapter.
 
-Once configured, the adapter can be selected directly on a class:
+Once configured, the adapter can be selected according to the `model-thin` [adapter API](https://github.com/davidrekow/model-thin#adapters).
 
-```javascript
-Model.useAdapter(datastore);
-```
-
-or can be exposed for usage as part of your app init via the `model-thin` adapter API:
-
-```javascript
-Model.adapters('datastore', datastore);
-...
-// elsewhere in the codebase
-Model.useAdapter('datastore');
-```
-
-Check out the [`query` method](https://github.com/davidrekow/model-thin-gcloud-datastore/blob/master/index.js#L103:L157) for a look at how passed query options are utilized, and see the [datastore query docs](https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore/query) for the expected values.
+Check out the [`query` method](https://github.com/davidrekow/model-thin-gcloud-datastore/blob/master/index.js#L107:L172) for a look at how passed query options are utilized, and see the [datastore query docs](https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore/query) for the expected values.
