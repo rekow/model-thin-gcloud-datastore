@@ -107,8 +107,8 @@ module.exports = {
   query: function (queryOpts, cb) {
     var kind = queryOpts.kind,
       query = this.ds.createQuery(
-        queryOpts.namespace || this.ds.namespace,
-        kind.prototype.kind),
+        queryOpts.namespace || kind.namespace || this.ds.namespace,
+        kind.kind),
       cursor, filters;
 
     if (queryOpts.select) {
