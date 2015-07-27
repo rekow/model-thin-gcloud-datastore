@@ -1,0 +1,29 @@
+{
+  "name": "model-thin-gcloud-datastore",
+  "version": "1.0.0",
+  "description": "Storage adapter for the model-thin package targeting the Google Cloud Datastore.",
+  "keywords": [
+    "model-thin",
+    "gcloud",
+    "cloud datastore",
+    "storage adapter"
+  ],
+  "author": {
+    "name": "David Rekow",
+    "email": "d@davidrekow.com",
+    "url": "http://github.com/davidrekow"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidrekow/model-thin-gcloud-datastore.git"
+  },
+  "bugs": "https://github.com/davidrekow/model-thin-gcloud-datastore/issues",
+  "license": "MIT",
+  "dependencies": {
+    "gcloud": "^0.16.0"
+  },
+  "peerDependencies": {
+    "model-thin": "^0.2.0"
+  }
+}
