@@ -3,7 +3,8 @@
  * @author David Rekow <d@davidrekow.com>
  */
 
-var gcloud = require('gcloud')
+var gcloud = require('gcloud'),
+  Model = require('model-thin');
 
 /**
  * @interface DatastoreKey
@@ -56,18 +57,39 @@ module.exports = {
    * @param {function(Error=)=} cb
    */
   persist: function (model, cb) {
-    var key = this.key(model);
+    var key = this.key(model),
+      data = model._prop,
+      entities = [], entity;
 
-    this.ds.save({
+    for (var k in data) {
+      if (data[k] instanceof Model) {
+        entity = data[k];
+        data[k] = this.key(data[k]);
+
+        if (entity._changed) {
+          entities.push({
+            key: data[k],
+            data: entity._prop
+          });
+        }
+      }
+    }
+
+    entities.push({
       key: key,
-      data: model._prop
-    }, function (err) {
+      data: data
+    });
+
+    this.ds.save(entities, function (err) {
       if (err) {
         cb(err);
       }
 
       model.id(key.path[key.path.length - 1]);
-      cb();
+
+      if (cb) {
+        cb();
+      }
     });
   },
 

@@ -1,6 +1,6 @@
 {
   "name": "model-thin-gcloud-datastore",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Storage adapter for the model-thin package targeting the Google Cloud Datastore.",
   "keywords": [
     "model-thin",
@@ -24,6 +24,6 @@
     "gcloud": "^0.16.0"
   },
   "peerDependencies": {
-    "model-thin": ">=0.4.0"
+    "model-thin": ">=0.4.1"
   }
 }

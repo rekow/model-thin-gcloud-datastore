@@ -8,8 +8,8 @@ Install alongside [`model-thin`](https://www.npmjs.com/package/model-thin) via `
 
 ```json
 dependencies: {
-  "model-thin": ">=0.4.0",
-  "model-thin-gcloud-datastore": "^1.2.0"
+  "model-thin": ">=0.4.1",
+  "model-thin-gcloud-datastore": "^1.3.0"
 }
 ```
 
@@ -33,4 +33,4 @@ If not running on Google Compute Engine, additional credentials need to be provi
 
 Once configured, the adapter can be selected according to the `model-thin` [adapter API](https://github.com/davidrekow/model-thin#adapters).
 
-Check out the [`query` method](https://github.com/davidrekow/model-thin-gcloud-datastore/blob/master/index.js#L107:L172) for a look at how passed query options are utilized, and see the [datastore query docs](https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore/query) for the expected values.
+Check out the [`query` method](https://github.com/davidrekow/model-thin-gcloud-datastore/blob/master/index.js#L129:L185) for a look at how passed query options are utilized, and see the [datastore query docs](https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore/query) for the expected values.
